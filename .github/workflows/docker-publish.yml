@@ -1,7 +1,7 @@
 name: ci
 
 on:
-  release:
+  push:
     branches:
       - 'main'
 
@@ -17,6 +17,8 @@ jobs:
         uses: Kaven-Universe/github-action-current-date-time@v1
         with:
           format: "YYYY_MM_DD HH_mm_ss_SSS"
+      - name: Output1
+        run: echo "The time was ${{ steps.t1.outputs.time }}"  
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
       - name: Check out repository code
         uses: actions/checkout@v2
