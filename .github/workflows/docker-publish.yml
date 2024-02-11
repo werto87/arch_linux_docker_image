@@ -22,7 +22,8 @@ jobs:
           # Docker Image name
           image-name: arch_linux_with_gcc_and_conan
           # Docker Image tag
-          image-tag: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g'
+          run: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g' >> $IMAGE_TAG
+          image-tag: ${{IMAGE_TAG}}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
