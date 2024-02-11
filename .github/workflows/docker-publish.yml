@@ -5,9 +5,18 @@ on:
     branches:
       - 'main'
 
-
 jobs:
+  set-timestamp:
+    runs-on: ubuntu-latest
+    outputs:
+      steps: ${{ steps.timestamp.outputs }}
+    steps:
+      - name: Set Timestamp
+        id: timestamp
+        run: echo "TIMESTAMP=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_ENV
+
   docker:
+    needs: set-timestamp
     runs-on: ubuntu-latest
     steps:
       - name: set variable GITHUB_ENV
@@ -25,7 +34,7 @@ jobs:
           # Docker Image name
           image-name: arch_linux_with_gcc_and_conan
           # Docker Image tag
-          image-tag: ${{TIMESTAMP}}
+          image-tag: $TIMESTAMP
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
