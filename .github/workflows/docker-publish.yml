@@ -6,18 +6,17 @@ on:
       - 'main'
 
 
-jobs:     
 
+jobs:     
   docker:
+  
     runs-on: ubuntu-latest
     steps:
-      - name: set timestamp of now
-        id: timestamp-now
-        run: |
-          value=${{ github.event.repository.updated_at}}
-          value=${value//-/_}
-          value=${value//:/_}
-          echo "TIMESTAMP_OF_NOW=${value}" >> "$GITHUB_OUTPUT"
+      - name: Test1
+        id: t1
+        uses: Kaven-Universe/github-action-current-date-time@v1
+        with:
+          format: "YYYY_MM_DD HH_mm_ss_SSS"
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -31,7 +30,7 @@ jobs:
           # Docker Image name
           image-name: archlinux_base_devel_conan
           # Docker Image tag
-          image-tag: ${{ steps.timestamp-now.outputs.TIMESTAMP_OF_NOW }}
+          image-tag: ${{ steps.t1.outputs.time }}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
