@@ -5,7 +5,7 @@ RUN sudo useradd -m build_user &&\
 USER build_user
 RUN sudo pacman-key --init &&\
     sudo pacman -Syu &&\
-    sudo pacman -S git --noconfirm &&\
+    sudo pacman -S git cmake --noconfirm &&\
     cd /home/build_user &&\
     git clone https://aur.archlinux.org/yay.git &&\
     cd yay && \
