@@ -4,19 +4,20 @@ on:
   push:
     branches:
       - 'main'
-env:
-  DAY_OF_WEEK: Monday
 
-jobs:
-  set-timestamp:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set Timestamp
-        id: timestamp
-        run: echo "TIMESTAMP=$(date +"%Y%m%d%H%M%S")" >> $GITHUB_ENV
+
+jobs:     
+
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Set color
+        id: color-selector
+        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+      - name: Get color
+        env:
+          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+        run: echo "The selected color is $SELECTED_COLOR"
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -30,7 +31,7 @@ jobs:
           # Docker Image name
           image-name: example_of_a_game_server
           # Docker Image tag
-          image-tag: ${{env.DAY_OF_WEEK}}
+          image-tag: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
