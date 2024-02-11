@@ -30,7 +30,7 @@ jobs:
           # Docker Image name
           image-name: example_of_a_game_server
           # Docker Image tag
-          image-tag: env.DAY_OF_WEEK
+          image-tag: ${{env.DAY_OF_WEEK}}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
