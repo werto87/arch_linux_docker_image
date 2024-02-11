@@ -11,13 +11,12 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Set color
-        id: color-selector
-        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
-      - name: Get color
-        env:
-          SELECTED_COLOR: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
-        run: echo "The selected color is $SELECTED_COLOR"
+      - name: set timestamp of now
+        id: timestamp-now
+        run: |
+          value=${value//-/_}
+          value=${value//:/_}
+          echo "TIMESTAMP_OF_NOW=${value}" >> "$GITHUB_OUTPUT"
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -31,7 +30,7 @@ jobs:
           # Docker Image name
           image-name: example_of_a_game_server
           # Docker Image tag
-          image-tag: ${{ steps.color-selector.outputs.SELECTED_COLOR }}
+          image-tag: ${{ steps.timestamp-now.outputs.TIMESTAMP_OF_NOW }}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
