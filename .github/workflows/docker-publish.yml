@@ -10,11 +10,11 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g' >>$TIMESTAMP
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Build and publish Docker Image to GitHub Packages Registry
-      - run: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g' >>$TIMESTAMP
   # You may pin to the exact commit or the version.
   # uses: VaultVulp/gp-docker-action@6fa9f10d2b6f0080b7e21087c52db331d1f16371
         uses: VaultVulp/gp-docker-action@1.2.0
