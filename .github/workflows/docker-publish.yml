@@ -14,7 +14,7 @@ jobs:
       - name: set timestamp of now
         id: timestamp-now
         run: |
-          value=${{ github.event.repository.pushed_at}}
+          value=${{ github.event.repository.updated_at}}
           value=${value//-/_}
           value=${value//:/_}
           echo "TIMESTAMP_OF_NOW=${value}" >> "$GITHUB_OUTPUT"
