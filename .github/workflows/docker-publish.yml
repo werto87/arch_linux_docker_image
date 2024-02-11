@@ -10,8 +10,9 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: set variable
+      - name: set variable GITHUB_ENV
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
+      - name: set variable TIMESTAMP
       - run: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g' >> $TIMESTAMP
       - name: Check out repository code
         uses: actions/checkout@v2
