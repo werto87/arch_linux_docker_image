@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
 env:
-  TIMESTAMPT: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g'
+  TIMESTAMP: echo ${{ github.event.repository.updated_at}} | sed 's/:/./g'
 
 jobs:
   docker:
@@ -25,7 +25,7 @@ jobs:
           # Docker Image name
           image-name: arch_linux_with_gcc_and_conan
           # Docker Image tag
-          image-tag: $TIMESTAMPT
+          image-tag: ${{TIMESTAMP}}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
