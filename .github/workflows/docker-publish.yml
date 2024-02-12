@@ -9,13 +9,11 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Test1
-        id: t1
+      - name: TIMESTAMP
+        id: timestamp
         uses: Kaven-Universe/github-action-current-date-time@v1
         with:
           format: "YYYY_MM_DD_HH_mm_ss"
-      - name: Output1
-        run: echo "The time was ${{ steps.t1.outputs.time }}"  
       - run: echo "DOCKER_BUILDKIT=1" >> $GITHUB_ENV
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -29,7 +27,7 @@ jobs:
           # Docker Image name
           image-name: archlinux_base_devel_conan
           # Docker Image tag
-          image-tag: ${{ steps.t1.outputs.time }}
+          image-tag: ${{ steps.timestamp.outputs.time }}
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
