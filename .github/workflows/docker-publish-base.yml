@@ -23,7 +23,7 @@ jobs:
           # GitHub token to push Docker image to GitHub Packages
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # Docker Image name
-          image-name: archlinux_base_devel_conan
+          image-name: archlinux_base
           # Docker Image tag
           image-tag: ${{ steps.timestamp.outputs.time }}
           # Extract git-tag from repository
