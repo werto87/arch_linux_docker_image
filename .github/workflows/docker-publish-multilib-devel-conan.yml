@@ -1,4 +1,4 @@
-name: ci
+name: archlinux-multilib-devel-conan
 
 on:
   workflow_dispatch:
