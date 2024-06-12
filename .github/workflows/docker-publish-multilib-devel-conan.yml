@@ -29,7 +29,7 @@ jobs:
           # Extract git-tag from repository
           extract-git-tag: false
           # Dockerfile name
-          dockerfile: Dockerfile
+          dockerfile: Dockerfile-multilib-devel-conan.yml
           # Path to build context
           build-context: .
           # Pull the image before buiding it
